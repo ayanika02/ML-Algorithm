@@ -1,0 +1,72 @@
+#QUESTION 9
+A farm grows grapes for jelly. The following data are measurements of sugar in the grapes of a sample
+taken from each of 12 truckloads.
+16.0 15.2 12.0 16.9
+15.8 15.5 12.5 14.5
+15.4 13.0 12.6 14.9
+Assume that these are observations of a normal distributed random variable X that has mean µ and
+standard deviation σ.
+(a) Give point estimates of µ and σ^2.
+(hint: Use MLE or MME to find the point estimators and then use the given data to find the
+estimates.)
+(b) Find an approximate 90% confidence interval for µ.
+
+```{r}
+grapes<-c(16,15.2,12,16.9,15.8,15.5,12.5,14.5,15.4,13,12.6,14.9)
+n <- length(grapes)
+samplemean <- mean(grapes)
+samplesd <- sd(grapes)
+critical_t <- qt(0.95,df=n-1)
+margin_of_error <- critical_t*(samplesd/sqrt(n))
+conf_int=c(samplemean-margin_of_error,samplemean+margin_of_error)
+print(paste("mean: ", samplemean))
+print(paste("standard deviation: ",samplesd))
+print(conf_int)
+
+```
+#QUESTION 10
+Let X equal to the length (in centimeters) of a certain species of fish when caught in the spring. A
+random sample of n = 13 observations of X is Assume that these are observations of a normal distributed
+13.1 5.1 18.0 8.7
+16.5 9.8 6.8 12.0
+17.8 25.4 19.2 15.8
+23.0
+random variable X that has mean µ and standard deviation σ unknown.
+(a) Give a point estimate of the standard deviation σ of this species of fish.
+(b) Find a 95% confidence interval for σ
+```{r}
+fish <- c(13.1, 5.1, 18.0, 8.7, 16.5, 9.8, 6.8, 12.0, 17.8, 25.4, 19.2, 15.8, 23.0)
+samplemean <- mean(fish)
+samplesd <- sd(fish)
+critical_t <- qt(0.975,df=n-1)
+margin_of_error <- critical_t*(samplesd/sqrt(n))
+conf_int=c(samplemean-margin_of_error,samplemean+margin_of_error)
+print(paste("mean: ", samplemean))
+print(paste("standard deviation: ",samplesd))
+print(conf_int)
+
+```
+#QUESTION 11
+The I.Q. of few persons taken, at random, from a large population are recorded as
+117, 119, 125, 129, 131, 132, 136, 138, 141, 120, 101, 116.
+Assuming the population of scores to be normal with standard deviation= 9.9, can we believe that
+the average I.Q. of corresponding population is less than 127? (Test at 5 % significance level where
+Z0.05 = −1.645. ) Also find the 95% confidence interval for the population mean.
+```{r}
+library(BSDA)
+iq <- c(117, 119, 125, 129, 131, 132, 136, 138, 141, 120, 101, 116)
+pop_sd <- 9.9
+result <- z.test(x = iq, mu = 127, sigma.x = pop_sd, alternative = "less", conf.level=0.95)
+print(result)
+```
+#QUESTION 12
+The heights of 10 males of a normal population are found to be
+70, 67, 62, 67, 61, 68, 70, 64, 65, 66inches.
+Is it reasonable to believe that the average height is greater than 64 inches? Test at 5% significance
+level assuming that for 9 degrees of freedom t0.95 = 1.83.
+```{r}
+pop<-c(70,67,62,67,61,68,70,64,65,66)
+t.test(pop, mu=64, conf.level=0.95, alternative="greater")
+
+```
+

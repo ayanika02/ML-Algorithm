@@ -1,0 +1,58 @@
+```{r}
+library(readxl)
+data <- read_excel("C:/Users/Diya/Downloads/New_final_EM_Imputed.xlsx")
+str(data)
+#will need to convert AKI Status, Sex to factors
+```
+```{r}
+anyNA(data)
+```
+```{r}
+sum(is.na(data))
+```
+```{r}
+summary(data)
+
+```
+```{r}
+data$`AKI Status` <- as.factor(data$`AKI Status`)
+data$Sex <- as.factor(data$Sex)
+```
+
+```{r}
+data <- data[-c(1)]
+```
+
+
+```{r}
+summary(data)
+```
+```{r}
+multi_reg <- lm(`AKI Status`~. -Sex -Age,data=data[,-c(2,3)])
+summary(multi_reg)
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
